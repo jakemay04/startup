@@ -1,8 +1,7 @@
-# Your startup name here
-
+# Personal Favorite
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Personl Favorite is a social media website where you can post you're favorite activities, recipies and more. Vote and share youre favorites to see what is trending. Create a profile to post or vote on others posts. Learn about local activities and find new people to go with. 
 
 
 > [!NOTE]
@@ -26,7 +25,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever been bored or lacking creativity and don't know where to go? Maybe just google things to do, but are bothered by random websites filled with ads. Scroll on social media? But find yourself sitting in bed for hours. Personal Favorite has the goal of getting you out of your house to do things. Want to find parties going on? Check what parties are popular around you. A new video game or sport is starting to get popular? Find out what others are playing and maybe find a new friend to do it with.
 
 ### Design
 
@@ -43,20 +42,20 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Creating a profile to post about events or activities
+- Voting on favorite ideas and saving them for later
+- Comment or ask questions about events on posts
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Creating a feed page from recent posts from others. Seperate webpage showing account details and your posts/liked posts.
+- **CSS** - Making a visually apealing feed page and making the scrolling experience smooth. Creating a sleek interactive feed page.
+- **React** - Creating login and saving posts to your profile. Showing others posts and how many likes.
+- **Service** - Service for creating login and creating and uploading text-only posts. Saving amount of likes and comments on each posts for others to see. 
+- **DB/Login** - Secure login information in secure database. Making each account secure to post and be only authorized to post on their account with their login. Authenticating each account creation to be a real person.
+- **WebSocket** - Creating a feed for all users to see and interact with. Also a commenting system on each post.
 
 ## 🚀 AWS deliverable
 
