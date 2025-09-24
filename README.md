@@ -5,11 +5,6 @@ Personl Favorite is a social media website where you can post you're favorite ac
 
 ## 🚀 Specification Deliverable
 
-> [!NOTE]
->  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
-
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
-
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
@@ -53,21 +48,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I added a login, home, profile and about page to my website with a header that links between them.
+- [x] **Proper HTML element usage** - Usage of a Header and footer consistant on all pages.
+- [x] **Links** - Buttons in the header that link to other pages and a "return to login" button at the bottom.
+- [x] **Text** - Added filler text for sample posts and an about section.
+- [x] **3rd party API placeholder** - Placed locations in the feed page where people can use geotags via google maps api. I am not sure if login requires 3rd party api or not.
+- [x] **Images** - Website logo in header along with sample profile picture.
+- [x] **Login placeholder** - Login email and password on index.html
+- [x] **DB data placeholder** - Placeholder on the user profile to view past posts or saved posts.
+- [x] **WebSocket placeholder** - Used on homepage to update new feed posts without refreshing.
 
 ## 🚀 CSS deliverable
 
