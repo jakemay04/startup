@@ -78,22 +78,34 @@ footer a {
 
 .logincontainer {
   background: #ffffff;
-  padding: 20px 30px;
-  border-radius: 8px;
+  padding: 20px 60px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
 
 .logininput {
   width: 100%;
-  padding: 10px 15px;
-  margin: 10px 0;
+  padding: 15px 20px;
+  margin: 1%;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   transition: border-color 0.3s ease;
 }
 
+
+.site-button {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 1%;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
 @media (max-height: 600px) {
   .container {
