@@ -68,12 +68,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Implementation of these tags for all pages to make the styling more appealing
+- [x] **Navigation elements** - Utilized navigation elements to both navigate between pages and add buttons for login and posts
+- [x] **Responsive to window resizing** - The website sizes cleanly depending on the size of display
+- [x] **Application elements** - Elements of the profile page and post creating added.
+- [x] **Application text content** - Sample text content for home page and profile page created.
+- [x] **Application images** - Placeholder images for profile pictures and picture posts also added.
 
 ## 🚀 React part 1: Routing deliverable
 
