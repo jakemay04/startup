@@ -24,6 +24,8 @@ main {
 
 footer {
   flex: 0 30px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
 
 menu {
@@ -42,6 +44,20 @@ menu {
 
 menu .nav-item {
   padding: 0 0.3em;
+}
+
+.footer-button {
+  width: 100px;
+  padding: 15px 20px;
+  margin: 1%;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
 }
 
 footer a {
@@ -131,6 +147,7 @@ footer a {
   transition: background-color 0.3s ease;
   text-align: right;
 }
+
 
 @media (max-height: 600px) {
   .container {
