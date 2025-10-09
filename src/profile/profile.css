@@ -1,11 +1,11 @@
 
 
-th {
+.th {
     border: 1px solid;
     width: 400px;
 }
 
-td {
+.td {
     border: 1px solid;
     width: 200px;
 }
