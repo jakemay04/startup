@@ -30,7 +30,7 @@ export default function App() {
             <hr />
             </header>
             <Routes>
-                <Route path='/' element={<Login />} exact />
+                <Route path='/login' element={<Login />} exact />
                 <Route path='/home' element={<Home />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/about' element={<About />} />
@@ -38,7 +38,9 @@ export default function App() {
             </Routes>
             <footer>
             <hr />
-            <a href = "index.html" class= "footer-button">back to login</a>
+            <NavLink className="footer-button" to="login">
+                    Back to Login
+                </NavLink>
             <span class="text-reset">Jake May</span>
             <a href="https://github.com/jakemay04/startup/tree/main" class= "footer-button">GitHub</a>
             </footer>
