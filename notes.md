@@ -74,12 +74,12 @@ I also used SVG to make the icon and logo for the app. This turned out to be a p
 ```
 
 # JS
-How to get something = document.getElementById("[desired ID]").value;
-How to get message = document.getElementById("message");
-Change content of message = message.textContent = "New message"
-Change color of message = message.style.color = 'green'
-What is event lisiner = whenever an event is updated, it changes the event
-change something onclick = document.getElementById("[id name of button}").onclick = () => {[function]}
+How to get something = document.getElementById("[desired ID]").value; \n
+How to get message = document.getElementById("message"); \n
+Change content of message = message.textContent = "New message" \n
+Change color of message = message.style.color = 'green' \n
+What is event lisiner = whenever an event is updated, it changes the event \n
+change something onclick = document.getElementById("[id name of button}").onclick = () => {[function]} \n
 
 
 
@@ -112,4 +112,5 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
 
