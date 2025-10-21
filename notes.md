@@ -19,11 +19,16 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 ## HTML
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+Initilize with <!DOCTYPE html> at top. Must enclose code with <html>
+Link css sheet = <link rel="stylesheet: href="[filename].css>
+using Javascript = <script src="[filename.js]></script>
 
 ## CSS
+
+How to access ID = # message {text-weight: bold;}
+#
+
 
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
 
@@ -68,6 +73,16 @@ I also used SVG to make the icon and logo for the app. This turned out to be a p
 </svg>
 ```
 
+# JS
+How to get something = document.getElementById("[desired ID]").value;
+How to get message = document.getElementById("message");
+Change content of message = message.textContent = "New message"
+Change color of message = message.style.color = 'green'
+What is event lisiner = whenever an event is updated, it changes the event
+change something onclick = document.getElementById("[id name of button}").onclick = () => {[function]}
+
+
+
 ## React Part 1: Routing
 
 Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
@@ -97,3 +112,4 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
