@@ -1,14 +1,12 @@
 import React from 'react';
 import './home.css';
-import username from '../login/login.jsx';
 
 const PostCard = ({ post }) => {
-
   return (
     <div className="post-card">
       <div className="profile-pic"></div>
-      <div className = "profile-info">
-      <div className = "username-display">{username}</div>
+      <div className="profile-info">
+        <div className="username">User</div>
       </div>
       <p>{post.content}</p>
     </div>

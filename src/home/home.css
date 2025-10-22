@@ -62,26 +62,53 @@ h1 {
   margin-bottom: 20px;
 }
 
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  background-color: #ddd;
-  border-radius: 50%;
-  margin-right: 10px;
-  text-align: center;
-  line-height: 40px;
-  font-weight: bold;
-  color: #555;
+.post-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
 }
 
-.user-info {
-  line-height: 1.2;
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.profile-pic {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  margin-right: 15px;
+  text-align: center;
+  line-height: 48px;
+  font-weight: bold;
+  color: #555;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .username {
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a73e8;
+  margin-bottom: 4px;
+}
+
+.post-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
   color: #333;
+  padding: 0 15px;
 }
 
 .feed-item-profile {
