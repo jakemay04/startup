@@ -24,6 +24,19 @@ const PostInput = ({ onPostSubmit }) => {
       setPostContent('');
     }
   };
+
+  return (
+    <form onSubmit={handleSubmit} className="post-input-form">
+      <input
+        type="text"
+        value={postContent}
+        onChange={(e) => setPostContent(e.target.value)}
+        placeholder="Insert text here"
+        className="postinput"
+      />
+      <button type="submit" className="send-button">➤</button>
+    </form>
+  );
 };
 
 export function Home() {
@@ -35,34 +48,15 @@ export function Home() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div className="feed-container">
-          <div className="feed-item-profile">
-            <PostInput onPostSubmit={handlePostSubmit} />
-            {/* Profile info can go here */}
-            {posts.map((post => (
-              <postCard key={post.id} post={post} />
-            )))}
-            {posts.length === 0 && <p>No posts available.</p>   }
-            <input type="text" placeholder="insert text here" className="postinput" />
-            <button className="send-button">➤</button>
-          </div>
-
-          
-          <div className="feed-item">
-            <img src="image1.jpg" alt="Post Image"></img>
-            <p className="feed-text">This is the first post in the feed!</p>
-          </div>
-
-          <div className="feed-item">
-            <img src="image2.jpg" alt="Post Image"></img>
-            <p className="feed-text">Here's another post with some text.</p>
-          </div>
-
-          <div className="feed-item">
-          <img src="image3.jpg" alt="Post Image"></img>
-          <p className="feed-text">Enjoy this third post in the feed!</p>
-          </div>
-
+        <div className="feed-item-profile">
+          <PostInput onPostSubmit={handlePostSubmit} />
+          {/* Profile info can go here */}
+          {posts.map(post => (
+            <PostCard key={post.id} post={post} />
+          ))}
+          {posts.length === 0 && <p>No posts available.</p>}
         </div>
+      </div>
     </main>
   );
 }
