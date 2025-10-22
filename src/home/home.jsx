@@ -4,8 +4,8 @@ import './home.css';
 const PostCard = ({ post }) => {
   return (
     <div className="post-card">
-      <div className="profile-pic"></div>
       <div className="profile-info">
+        <div className="profile-pic">U</div>
         <div className="username">User</div>
       </div>
       <p>{post.content}</p>
