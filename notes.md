@@ -18,8 +18,7 @@ Launching my AMI I initially put it on a private subnet. Even though it had a pu
 No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
 
 ## HTML
-
-
+<div> is used to style in css and structure content, but does not inhearently do anything.
 Initilize with <!DOCTYPE html> at top. Must enclose code with <html>
 Link css sheet = <link rel="stylesheet: href="[filename].css>
 using Javascript = <script src="[filename.js]></script>
@@ -112,6 +111,7 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
 
 
 
