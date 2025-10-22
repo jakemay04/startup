@@ -1,12 +1,20 @@
 import React from 'react';
 import './home.css';
+import username from '../login/login.jsx';
 
+const PostCard = ({ post }) => {
 
-const PostCard = ({ post }) => (
-  <div className="post-card">
-    <p>{post.content}</p>
-  </div>
-); 
+  return (
+    <div className="post-card">
+      <div className="profile-pic"></div>
+      <div className = "profile-info">
+      <div className = "username-display">{username}</div>
+      </div>
+      <p>{post.content}</p>
+    </div>
+  );
+};
+
 const initialPosts = [
   { id: 1, content: 'This is the first post in the feed!' },
   { id: 2, content: 'Here\'s another post with some text.' },
