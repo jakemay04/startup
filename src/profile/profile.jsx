@@ -43,18 +43,53 @@ export function Profile() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-      <table>
-          <tr>
-            <th>Profile</th>
-            <th>Recent Posts</th>
-          </tr>
-          <tr>
-            <td> Name: About:</td>
-            <td>Recent Posts</td>
-          </tr>
-          
-        </table>
-        </div>
+
+        <header>{profile.name[0]}
+          <h1>{profile.name}</h1>
+          <p>{profile.email}</p>
+          <p>{profile.bio}</p>
+          <button className="site-button" onClick={handleEdit}>Edit Profile</button>
+        </header>
+        {isEditing ?  (
+          <div>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              />
+
+            <textarea
+                id="bio"
+                name="bio"
+                rows="3"
+                value={formData.bio}
+                onChange={handleChange}
+              ></textarea>
+            
+            <div style={buttonContainerStyle}>
+              <button
+                onClick={handleCancel}
+                style={buttonStyle}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSave}
+                style={primaryButtonStyle}
+              >
+                Save
+              </button>
+            </div>
+
+          </div>
+          ) : (
+          <div>
+          </div>
+          )}
+
+      </div>
     </main>
   );
 }
