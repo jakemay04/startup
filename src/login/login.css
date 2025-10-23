@@ -1,0 +1,32 @@
+.logincontainer {
+  background: #ffffff;
+  padding: 20px 60px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin: 20px auto;
+  max-width: 500px;
+  border-radius: 8px;
+}
+
+.logininput {
+  width: 90%;
+  padding: 15px 20px;
+  margin: 1%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.logininput:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+/* Style for the @ and 🔒 icons */
+.logincontainer span {
+  font-size: 20px;
+  margin-right: 10px;
+  color: #666;
+}

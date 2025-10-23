@@ -1,20 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../context/userContext';
 import './login.css';
 
 export function Login() {
-  const [username, setUsername] = React.useState('initialize-username');
-  const [password, setPassword] = React.useState('initialize-password');
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   // submit handler: captures current input values into constants
   function handleSubmit(event) {
     event.preventDefault();
     const enteredUsername = username.trim();
     const enteredPassword = password;
-    setUsername({ username: enteredUsername})
+    
+    // Set the user in context
+    setUser({ username: enteredUsername });
+    
     console.log('enteredUsername:', enteredUsername);
     console.log('enteredPassword:', enteredPassword);
     navigate('/home');

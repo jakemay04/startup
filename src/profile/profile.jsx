@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './profile.css';
-import { UserContext } from '../context/UserContext';
-
-// mock profile data
-
-const { user } = useContext(UserContext);
-const displayName = user?.username || profile.name;
-
-const initialProfile = {
-  name: displayName,
-  email: "example@byu.edu",
-  bio: "best college ever to exsist",
-  location: "Provo, UT",
-};
+import { UserContext } from '../context/userContext';
 
 export function Profile() {
+  const { user } = useContext(UserContext);
+  
+  const initialProfile = {
+    name: user?.username || 'User',
+    email: "example@byu.edu",
+    bio: "best college ever to exist",
+    location: "Provo, UT",
+  };
+
   const [profile, setProfile] = useState(initialProfile);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(profile);
+
+  useEffect(() => {
+    if (user?.username) {
+      setProfile(prev => ({ ...prev, name: user.username }));
+    }
+  }, [user]);
 
   // Small inline style objects used by the component
   const buttonContainerStyle = {

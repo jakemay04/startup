@@ -6,7 +6,7 @@ const PostCard = ({ post }) => {
     <div className="post-card">
       <div className="profile-info">
         <div className="profile-pic">U</div>
-        <div className="username">User</div>
+        <div className="mock_user">bot2</div>
       </div>
       <p>{post.content}</p>
     </div>

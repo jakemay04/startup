@@ -6,7 +6,7 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Profile } from './profile/profile';
 import { About } from './about/about';
-import { UserProvider } from './context/UserContext'; 
+import { UserProvider } from './context/userContext'; 
 
 
 export default function App() {
@@ -37,7 +37,8 @@ export default function App() {
             <hr />
         </header>
             <Routes>
-                <Route path='/login' element={<Login />} exact />
+                <Route path='/' element={<Login />} />
+                <Route path='/login' element={<Login />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/profile' element={<Profile />} />
                 <Route path='/about' element={<About />} />
@@ -48,8 +49,8 @@ export default function App() {
             <NavLink className="footer-button" to="login">
                     Back to Login
                 </NavLink>
-            <span class="text-reset">Jake May</span>
-            <a href="https://github.com/jakemay04/startup/tree/main" class= "footer-button">GitHub</a>
+            <span className="text-reset">Jake May</span>
+            <a href="https://github.com/jakemay04/startup/tree/main" className= "footer-button">GitHub</a>
             </footer>
 
         </div>
