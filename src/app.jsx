@@ -10,9 +10,13 @@ import { About } from './about/about';
 export default function App() {
   return (
     <BrowserRouter>
-        <div className="body bg-light text-light">
-            <header>
-            <h1>personal-favorite</h1>
+                <div className="body bg-light text-light">
+                <header>
+                        <link rel="icon" href="/favicon.ico" />
+                        <h1>
+                            <img src="/psf logo.png" alt="logo" className="navbar-logo" />
+                            personal-favorite
+                        </h1>
             <nav>
                 <menu>
                 <div className="tabs"></div>
@@ -28,7 +32,7 @@ export default function App() {
                 </menu>
             </nav>
             <hr />
-            </header>
+        </header>
             <Routes>
                 <Route path='/login' element={<Login />} exact />
                 <Route path='/home' element={<Home />} />

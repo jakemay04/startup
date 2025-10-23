@@ -13,13 +13,11 @@ export function Login() {
     const enteredPassword = password;
     console.log('enteredUsername:', enteredUsername);
     console.log('enteredPassword:', enteredPassword);
-    // Navigate to home page after submit
     navigate('/home');
   }
 
   // handler for Create button
   function handleCreateClick() {
-    // You can add create logic here
     navigate('/home');
   }
 

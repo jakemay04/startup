@@ -1,7 +1,30 @@
 import React from 'react';
 import './profile.css';
 
+//mock profile data
+const initialProfile = {
+  name: "Alex Johnson",
+  email: "alex.j@devco.com",
+  bio: "Front-end enthusiast and lover of clean code.",
+  location: "Austin, TX",
+};
+
+
 export function Profile() {
+  const [profile, setProfile] = useState(initialProfile);
+  // State to track if the profile is in editing mode
+  const [isEditing, setIsEditing] = useState(false);
+  // State for temporary form data while editing (to allow cancellation)
+  const [formData, setFormData] = useState(profile);
+
+  // Function to handle changes in the input fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
