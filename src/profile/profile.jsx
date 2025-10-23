@@ -3,10 +3,10 @@ import './profile.css';
 
 // mock profile data
 const initialProfile = {
-  name: "Alex Johnson",
-  email: "alex.j@devco.com",
-  bio: "Front-end enthusiast and lover of clean code.",
-  location: "Austin, TX",
+  name: "Shane C Reese",
+  email: "Shane@byu.edu",
+  bio: "best president ever to live",
+  location: "Provo, UT",
 };
 
 export function Profile() {
@@ -58,7 +58,7 @@ export function Profile() {
 
   return (
     <main className="container-fluid bg-secondary text-center">
-      <div className="profile-card" style={{ maxWidth: 720, margin: '24px auto', padding: 20, background: '#fff', borderRadius: 8 }}>
+      <div className="profile-card">
         <header style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
           <div className="profile-avatar">{profile.name[0]}</div>
           <div style={{ textAlign: 'left' }}>
