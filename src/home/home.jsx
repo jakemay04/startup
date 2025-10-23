@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/userContext';
 import './home.css';
 
 const PostCard = ({ post }) => {
   return (
     <div className="post-card">
       <div className="profile-info">
-        <div className="profile-pic">U</div>
-        <div className="mock_user">bot2</div>
+        <div className="profile-pic">{post.username?.[0] || 'U'}</div>
+        <div className="mock_user">{post.username || 'User'}</div>
       </div>
       <p>{post.content}</p>
     </div>
@@ -22,11 +23,12 @@ const initialPosts = [
 
 const PostInput = ({ onPostSubmit }) => {
   const [postContent, setPostContent] = React.useState('');
+  const { user } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (postContent.trim()) {
-      onPostSubmit({ id: Date.now(), content: postContent });
+      onPostSubmit({ id: Date.now(), content: postContent, username: user?.username || 'Anonymous' });
       setPostContent('');
     }
   };

@@ -130,6 +130,16 @@ footer a {
   transition: background-color 0.3s ease;
 }
 
+.text-reset {
+  color: rgb(0, 55, 255);
+  margin-left: 10px;
+  background-color: #000000;
+  padding: 15px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 
 @media (max-height: 600px) {
   .container {

@@ -34,11 +34,11 @@ export function Login() {
       <h1>Welcome to personal-favorite</h1>
       <form onSubmit={handleSubmit}>
         <div className="logincontainer">
-            <h2>3rd party login api</h2>
-          <span>@</span>
+            <h2>Start Here</h2>
+          <span>:)    </span>
           <input
             type="text"
-            placeholder="your@email.com"
+            placeholder="username"
             className="logininput"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
