@@ -87,8 +87,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out** - THIS I DID
+- [X] **Hooks** - I did THIS
 
 ## 🚀 Service deliverable
 
@@ -118,3 +118,4 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
 - [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+
