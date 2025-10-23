@@ -6,10 +6,13 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Profile } from './profile/profile';
 import { About } from './about/about';
+import { UserProvider } from './context/UserContext'; 
+
 
 export default function App() {
   return (
     <BrowserRouter>
+            <UserProvider>
                 <div className="body bg-light text-light">
                 <header>
                         <link rel="icon" href="/favicon.ico" />
@@ -50,6 +53,7 @@ export default function App() {
             </footer>
 
         </div>
+        </UserProvider>
     </BrowserRouter>
   );
 }

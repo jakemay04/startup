@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import './profile.css';
+import { UserContext } from '../context/UserContext';
 
 // mock profile data
+
+const { user } = useContext(UserContext);
+const displayName = user?.username || profile.name;
+
 const initialProfile = {
-  name: "Shane C Reese",
-  email: "Shane@byu.edu",
-  bio: "best president ever to live",
+  name: displayName,
+  email: "example@byu.edu",
+  bio: "best college ever to exsist",
   location: "Provo, UT",
 };
 
