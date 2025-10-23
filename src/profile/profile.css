@@ -1,11 +1,9 @@
-
-
-.th {
-    border: 1px solid;
-    width: 400px;
-}
-
-.td {
-    border: 1px solid;
-    width: 200px;
-}
+.containerStyle {
+    display: flex;
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    font-family: sans-serif;
+  };
