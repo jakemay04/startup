@@ -9,6 +9,21 @@ const initialProfile = {
   location: "Austin, TX",
 };
 
+const handleSave = () => {
+    setProfile(formData); // Update the permanent profile state
+    setIsEditing(false); // Switch back to display mode
+  };
+
+
+const handleCancel = () => {
+    setFormData(profile); // Revert form data back to the saved profile state
+    setIsEditing(false); // Switch back to display mode
+  };
+
+const handleEdit = () => {
+    setFormData(profile); // Initialize form data with current profile data
+    setIsEditing(true);
+  };
 
 export function Profile() {
   const [profile, setProfile] = useState(initialProfile);
