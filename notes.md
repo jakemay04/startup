@@ -17,17 +17,67 @@ Launching my AMI I initially put it on a private subnet. Even though it had a pu
 
 No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
 
+## Commandline
+chmod: changes access permisions 
+pwd: prints current directory
+cd: go to a file location
+ls: list all current files
+ls -la: lists all files, including hidden or long format
+vim and nano: text editors in terminal
+mkdir: make a new directory
+mv: move file
+rm: remove
+man: help commands
+ssh: secure shell
+ps: process status
+wget: used to download files
+sudo: run automatically as admin
+domain = banana(subdomain).fruit(subdomain).bozo(root domain).click(top level domain)
+HTTPS = must have a web certificate. port 443
+HTTP = port 80
+SSH = port 22
+
+
 ## HTML
 
+all links in html are
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Page Title</title>
+  </head>
+  <body>
+    <!-- Content goes here -->
+      <h1>Main Heading</h1>
+      <h2>Sub Heading</h2>
+      <h3>Sub-sub Heading</h3>
+      <p>This is a paragraph of text.</p>
+      <br> <!-- Line break -->
+      <ul style="list-style-type:none;">
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+      </ul>
+  </body>
+</html>
 
-Initilize with <!DOCTYPE html> at top. Must enclose code with <html>
-Link css sheet = <link rel="stylesheet: href="[filename].css>
-using Javascript = <script src="[filename.js]></script>
+div is used to style in css and structure content, but does not inhearently do anything.
+Initilize with !DOCTYPE html at top. Must enclose code with <html>
+Link css sheet = link rel="stylesheet: href="[filename].css
+using Javascript = .script src="[filename.js]  /script
+(#title) is used to change the browser title bar
+grid is used to create a css grid class
+Displaying image with hyperlink = <a href = [url}><img src=[imagefile]></a>
+
 
 ## CSS
 
 How to access ID = # message {text-weight: bold;}
-#
+Padding = controls the space within an html element between the content and its border
+margin = controls the space around an element
+Flex: adjusts the size of the element based on the window size
+Default deplay value for span is inline.
+CSS box model = content - padding - border - margin
 
 
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
@@ -80,7 +130,49 @@ Change content of message = message.textContent = "New message"
 Change color of message = message.style.color = 'green'
 What is event lisiner = whenever an event is updated, it changes the event
 change something onclick = document.getElementById("[id name of button}").onclick = () => {[function]}
+DOM (Document object model) = represents page structure as a tree of objects. allows to use JS to interact dinamically with a webpage using objects and their attributes.
+JSON (Java Script Object Notation) = is a key:value pair that takes standard data types and is enclosed by {}
 
+promises: 
+myPromise.then(
+  function(value) { /* code if successful */ },
+  function(error) { /* code if some error */ }
+);
+
+if (condition) {
+  // Code to be executed if the condition is true
+} else {
+  // Code to be executed if the condition is false
+}
+
+for (initialization; condition; final-expression) {
+  // Code to be executed in each iteration
+}
+
+while (condition) {
+  // Code to be executed as long as the condition is true
+}
+
+switch (expression) {
+  case value1:
+    // Code to execute if expression === value1
+    break;
+  case value2:
+    // Code to execute if expression === value2
+    break;
+  // ... more cases
+  default:
+    // Code to execute if no case matches the expression
+}
+
+// Create an Object
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+Yes you can add new properties to objects by doing object.[new prop] = [info]
 
 
 ## React Part 1: Routing
@@ -112,6 +204,8 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
+
 
 
 
