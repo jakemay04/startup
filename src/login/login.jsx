@@ -26,7 +26,10 @@ export function Login() {
     const enteredPassword = password;
     
     // Set the user in context
-    setUser({ username: enteredEmail });
+    setUser(prevUser => ({
+      ...prevUser, 
+      username: enteredEmail 
+    }));
     
     console.log('enteredEmail:', enteredEmail);
     console.log('enteredPassword:', enteredPassword);
@@ -42,7 +45,10 @@ export function Login() {
     });
     const data = await res.json();
     if (res.ok) {
-      setUser({ email: data.email });
+      setUser(prevUser => ({ 
+        ...prevUser, 
+        email: data.email 
+      }));
       navigate('/home');
     } else {
       alert('Authentication failed');

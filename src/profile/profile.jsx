@@ -3,13 +3,13 @@ import './profile.css';
 import { UserContext } from '../context/userContext';
 
 export function Profile() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   
   const initialProfile = {
     name: user?.username || 'User',
-    email: "example@byu.edu",
-    bio: "best college ever to exist",
-    location: "Provo, UT",
+    email: user?.email || "example@byu.edu",
+    bio: user?.bio || "best college ever to exist",
+    location: user?.location || "Provo, UT",
   };
 
   const [profile, setProfile] = useState(initialProfile);
@@ -17,8 +17,15 @@ export function Profile() {
   const [formData, setFormData] = useState(profile);
 
   useEffect(() => {
-    if (user?.username) {
-      setProfile(prev => ({ ...prev, name: user.username }));
+    const newProfile = {
+      name: user?.username || initialProfile.name,
+      email: user?.email || initialProfile.email,
+      bio: user?.bio || initialProfile.bio,
+      location: user?.location || initialProfile.location,
+    };
+    setProfile(newProfile);
+    if (!isEditing) {
+        setFormData(newProfile);
     }
   }, [user]);
 
@@ -53,10 +60,25 @@ export function Profile() {
     setIsEditing(false);
   };
 
-  const handleSave = () => {
-    setProfile(formData);
-    setIsEditing(false);
-  };
+
+const handleSave = () => {
+  setProfile(formData);
+
+  setUser(prevUser => ({
+    ...prevUser,
+    username: formData.name,
+    bio: formData.bio,
+    location: formData.location,
+  }));
+
+  setIsEditing(false);
+
+  fetch('/api/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+  });
+};
 
   // Handle input changes for both inputs and textarea
   const handleChange = (e) => {
@@ -71,7 +93,7 @@ export function Profile() {
           <div className="profile-avatar">{profile.name[0]}</div>
           <div style={{ textAlign: 'left' }}>
             <h2 style={{ margin: 0 }}>{profile.name}</h2>
-            <p style={{ margin: 0, fontSize: 14, color: '#666' }}>{profile.username}</p>
+            <p style={{ margin: 0, fontSize: 14, color: '#666' }}>{user.email}</p>
           </div>
           <div style={{ marginLeft: 'auto' }}>
             <button className="site-button" onClick={handleEdit}>Edit Profile</button>
@@ -86,6 +108,11 @@ export function Profile() {
         ) : (
           <section>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div style={{ textAlign: 'left' }}>
+                <h2 style={{ margin: 0 }}>{profile.name}</h2>
+                {/* Display user email from context */}
+                <p style={{ margin: 0, fontSize: 14, color: '#666' }}>{user.email}</p> 
+              </div>
               <input
                 type="text"
                 id="name"

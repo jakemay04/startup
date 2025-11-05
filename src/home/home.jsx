@@ -28,7 +28,7 @@ const PostInput = ({ onPostSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (postContent.trim()) {
-      onPostSubmit({ id: Date.now(), content: postContent, email: user?.email || 'Anonymous' });
+      onPostSubmit({ id: Date.now(), content: postContent, name: user?.username || user?.email});
       setPostContent('');
     }
   };
