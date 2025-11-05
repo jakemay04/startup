@@ -6,8 +6,8 @@ const PostCard = ({ post }) => {
   return (
     <div className="post-card">
       <div className="profile-info">
-        <div className="profile-pic">{post.username?.[0] || 'U'}</div>
-        <div className="mock_user">{post.username || 'User'}</div>
+        <div className="profile-pic">{post.email?.[0] || 'U'}</div>
+        <div className="mock_user">{post.email || 'User'}</div>
       </div>
       <p>{post.content}</p>
     </div>
@@ -28,7 +28,7 @@ const PostInput = ({ onPostSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (postContent.trim()) {
-      onPostSubmit({ id: Date.now(), content: postContent, username: user?.username || 'Anonymous' });
+      onPostSubmit({ id: Date.now(), content: postContent, email: user?.email || 'Anonymous' });
       setPostContent('');
     }
   };
@@ -48,6 +48,8 @@ const PostInput = ({ onPostSubmit }) => {
 };
 
 export function Home() {
+  const [postContent, setPostContent] = React.useState('');
+  const { user } = useContext(UserContext);
   const [posts, setPosts] = React.useState(initialPosts);
 
   const handlePostSubmit = (newPost) => {
@@ -55,6 +57,7 @@ export function Home() {
   }
   return (
     <main className="container-fluid bg-secondary text-center">
+      <div>Logged in as: {user?.email || 'Guest'}</div>
       <div className="feed-container">
         <div className="feed-item-profile">
           <PostInput onPostSubmit={handlePostSubmit} />

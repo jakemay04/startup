@@ -40,9 +40,10 @@ export function Login() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    await res.json();
+    const data = await res.json();
     if (res.ok) {
-      navigate('/profile');
+      setUser({ email: data.email });
+      navigate('/home');
     } else {
       alert('Authentication failed');
     }
