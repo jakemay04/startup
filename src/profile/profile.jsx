@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './profile.css';
 import { UserContext } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
+
 
 export function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -61,30 +63,41 @@ export function Profile() {
   };
 
 
-const handleSave = () => {
-  setProfile(formData);
+  const handleSave = () => {
+    setProfile(formData);
 
-  setUser(prevUser => ({
-    ...prevUser,
-    username: formData.name,
-    bio: formData.bio,
-    location: formData.location,
-  }));
+    setUser(prevUser => ({
+      ...prevUser,
+      username: formData.name,
+      bio: formData.bio,
+      location: formData.location,
+    }));
 
-  setIsEditing(false);
+    setIsEditing(false);
 
-  fetch('/api/profile', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-  });
-};
-
-  // Handle input changes for both inputs and textarea
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    fetch('/api/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+    });
   };
+
+    // Handle input changes for both inputs and textarea
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const navigate = useNavigate();
+
+    function handleLogout() {
+      fetch('api/auth', {
+        method: 'DELETE',
+      });
+      setUser({});
+      navigate('/login');
+    }
+
 
   return (
     <main className="container-fluid bg-secondary text-center">
@@ -97,6 +110,8 @@ const handleSave = () => {
           </div>
           <div style={{ marginLeft: 'auto' }}>
             <button className="site-button" onClick={handleEdit}>Edit Profile</button>
+            <button className="site-button" onClick={handleLogout}>Logout</button>
+
           </div>
         </header>
 

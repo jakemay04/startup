@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/userContext';
 import './home.css';
+
+const GOOGLE_CALENDAR_API_KEY = 'AIzaSyBuR7XMNxS8_Zj2PgL1IBZfbyspMs2qLM4';
+const CALENDAR_ID = '6fd630cadd120e8cd62d73e0929066b7792b0c2c0a793de395262e052a5494df@group.calendar.google.com';
 
 const PostCard = ({ post }) => {
   return (
@@ -14,11 +17,27 @@ const PostCard = ({ post }) => {
   );
 };
 
-const initialPosts = [
-  { id: 1, content: 'This is the first post in the feed!' },
-  { id: 2, content: 'Here\'s another post with some text.' },
-  { id: 3, content: 'Enjoy this third post in the feed!' },
-];
+const getInitialPosts = () => {
+  const initialPosts = [
+    { id: 1, content: "This is the first post in the feed!", email: "default@user.com", username: "DefaultUser" },
+    { id: 2, content: "Here's another post with some text.", email: "default@user.com", username: "DefaultUser" },
+    { id: 3, content: "Enjoy this third post in the feed!", email: "default@user.com", username: "DefaultUser" },
+  ];
+  
+  try {
+    const storedPosts = localStorage.getItem('app_posts');
+    if (storedPosts) {
+      // Parse the stored JSON data
+      const parsedPosts = JSON.parse(storedPosts);
+      // Return stored posts if valid, otherwise return the default list
+      return parsedPosts.length > 0 ? parsedPosts : initialPosts;
+    }
+  } catch (error) {
+    console.error("Error reading from localStorage:", error);
+    // Fallback to initial posts if reading or parsing fails
+  }
+  return initialPosts;
+};
 
 
 const PostInput = ({ onPostSubmit }) => {
@@ -28,7 +47,13 @@ const PostInput = ({ onPostSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (postContent.trim()) {
-      onPostSubmit({ id: Date.now(), content: postContent, username: user?.username || user?.email, email: user?.email });
+      // Pass 'username' and 'email' to the new post object
+      onPostSubmit({ 
+        id: Date.now(), 
+        content: postContent, 
+        username: user?.username || user?.email || 'Unknown User',
+        email: user?.email || 'U' // for avatar display
+      });
       setPostContent('');
     }
   };
@@ -50,7 +75,16 @@ const PostInput = ({ onPostSubmit }) => {
 export function Home() {
   const [postContent, setPostContent] = React.useState('');
   const { user } = useContext(UserContext);
-  const [posts, setPosts] = React.useState(initialPosts);
+  const [posts, setPosts] = React.useState(getInitialPosts);
+  const [calendarEvents, setCalendarEvents] = useState([]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('app_posts', JSON.stringify(posts));
+    } catch (error) {
+      console.error("Error writing to localStorage:", error);
+    }
+  }, [posts]);
 
   const handlePostSubmit = (newPost) => {
     setPosts(prevPosts => [newPost, ...prevPosts]);
