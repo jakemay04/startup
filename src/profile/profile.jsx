@@ -71,7 +71,7 @@ export function Profile() {
           <div className="profile-avatar">{profile.name[0]}</div>
           <div style={{ textAlign: 'left' }}>
             <h2 style={{ margin: 0 }}>{profile.name}</h2>
-            <p style={{ margin: 0, fontSize: 14, color: '#666' }}>{profile.email}</p>
+            <p style={{ margin: 0, fontSize: 14, color: '#666' }}>{profile.username}</p>
           </div>
           <div style={{ marginLeft: 'auto' }}>
             <button className="site-button" onClick={handleEdit}>Edit Profile</button>
