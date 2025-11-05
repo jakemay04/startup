@@ -4,50 +4,30 @@ import { useContext } from 'react';
 import { UserContext } from '../context/userContext';
 import './login.css';
 
-
-
 export function Login() {
-  const navigate = useNavigate();
-  const [email, setEmail] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
-  function handleLogin() {
-    createAuth('PUT');
-  }
-
-  function handleRegister() {
-    createAuth('POST');
-  }
-
+  // submit handler: captures current input values into constants
   function handleSubmit(event) {
     event.preventDefault();
-    const enteredEmail = email.trim();
+    const enteredUsername = username.trim();
     const enteredPassword = password;
     
     // Set the user in context
-    setUser({ username: enteredEmail });
+    setUser({ username: enteredUsername });
     
-    console.log('enteredEmail:', enteredEmail);
+    console.log('enteredUsername:', enteredUsername);
     console.log('enteredPassword:', enteredPassword);
     navigate('/home');
   }
 
-
-  async function createAuth(method) {
-    const res = await fetch('api/auth', {
-      method: method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    await res.json();
-    if (res.ok) {
-      navigate('/profile');
-    } else {
-      alert('Authentication failed');
-    }
+  // handler for Create button
+  function handleCreateClick() {
+    navigate('/home');
   }
-
 
   return (
     <main className="container-fluid bg-secondary text-center">
@@ -58,10 +38,10 @@ export function Login() {
           <span>:)    </span>
           <input
             type="text"
-            placeholder="email"
+            placeholder="username"
             className="logininput"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} required
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="logincontainer">
@@ -71,11 +51,11 @@ export function Login() {
             placeholder="password"
             className="logininput"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} required
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-  <button type="button" className="site-button" disabled={!(email && password)} onClick={handleLogin}>Login</button>
-  <button type="button" className="site-button" disabled={!(email && password)} onClick={handleRegister}>Create</button>
+  <button type="submit" className="site-button">Login</button>
+  <button type="button" className="site-button" onClick={handleCreateClick}>Create</button>
       </form>
     </main>
   );

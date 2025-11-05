@@ -3,11 +3,15 @@ const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.static('public'));
-
 app.use(express.json());
+
+const apiRouter = express.Router();
+app.use(`/api`, apiRouter);
+
 
 const cookieParser = require('cookie-parser');
 const uuid = require('uuid');
+const bcrypt = require('bcryptjs');
 
 app.use(cookieParser());
 
@@ -74,9 +78,6 @@ app.get('/api/user/me', async (req, res) => {
 });
 
 app.listen(4000);
-
-
-const bcrypt = require('bcryptjs');
 
 const users = [];
 
