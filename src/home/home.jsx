@@ -1,9 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect} from 'react';
 import { UserContext } from '../context/userContext';
 import './home.css';
-
-const GOOGLE_CALENDAR_API_KEY = 'AIzaSyBuR7XMNxS8_Zj2PgL1IBZfbyspMs2qLM4';
-const CALENDAR_ID = '6fd630cadd120e8cd62d73e0929066b7792b0c2c0a793de395262e052a5494df@group.calendar.google.com';
 
 const PostCard = ({ post }) => {
   return (
@@ -13,6 +10,15 @@ const PostCard = ({ post }) => {
         <div className="mock_user">{post.username || 'User'}</div>
       </div>
       <p>{post.content}</p>
+    </div>
+  );
+};
+
+const SideBarTextBox = ({ title, content }) => {
+  return (
+    <div className="sidebar-textbox">
+      <h3>{title}</h3>
+      <p>{content}</p>
     </div>
   );
 };
@@ -76,7 +82,6 @@ export function Home() {
   const [postContent, setPostContent] = React.useState('');
   const { user } = useContext(UserContext);
   const [posts, setPosts] = React.useState(getInitialPosts);
-  const [calendarEvents, setCalendarEvents] = useState([]);
 
   useEffect(() => {
     try {
@@ -92,14 +97,21 @@ export function Home() {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>Logged in as: {user?.username || user?.email}</div>
-      <div className="feed-container">
-        <div className="feed-item-profile">
-          <PostInput onPostSubmit={handlePostSubmit} />
-          {/* Profile info can go here */}
-          {posts.map(post => (
-            <PostCard key={post.id} post={post} />
-          ))}
-          {posts.length === 0 && <p>No posts available.</p>}
+      <div className="feed-layout">
+
+        <div className="feed-sidebar-left">
+        <SideBarTextBox title= "Daily Inspo" content="Sample text for Daily Inspo." />
+        </div>
+
+        <div className="feed-container">
+          <div className="feed-item-profile">
+            <PostInput onPostSubmit={handlePostSubmit} />
+            {/* Profile info can go here */}
+            {posts.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))}
+            {posts.length === 0 && <p>No posts available.</p>}
+          </div>
         </div>
       </div>
     </main>
