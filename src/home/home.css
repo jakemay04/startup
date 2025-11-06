@@ -193,7 +193,8 @@ h1 {
   padding: 15px;
   margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  word-wrap: break-word; /* Ensure long words break */
+  word-wrap: break-word;
+  text-align: left;
 }
 
 .sidebar-textbox h3 {
@@ -203,8 +204,32 @@ h1 {
   margin-bottom: 10px;
 }
 
-.feed-sidebar-left,
-.feed-sidebar-right {
-    padding-top: 20px;
-    @media (max-width: 900px) { display: none; }
+.scrollable-feed-content {
+  /* This ensures the content can scroll when it overflows */
+  overflow-y: auto; 
+  /* Takes up remaining space in the feed-container flex column */
+  flex-grow: 1; 
+  padding-bottom: 20px; /* Add some padding at the bottom for better view */
+}
+
+@media (max-width: 900px) {
+    /* 1. Hide the sidebars completely on small screens */
+    .feed-sidebar-left,
+    .feed-sidebar-right {
+        display: none;
+    }
+
+    /* 2. Update the grid to be a single column when sidebars are hidden */
+    .feed-layout {
+        /* Mobile: Only one column for the main feed, taking 100% of the space */
+        grid-template-columns: 1fr; 
+        /* Adjust margin for mobile aesthetics if needed */
+        margin: 0 auto;
+        height: 100vh; /* Revert height to full view height for mobile */
+    }
+    
+    /* 3. Ensure the main feed container uses the available space */
+    .feed-container {
+        max-width: 100%;
+    }
 }

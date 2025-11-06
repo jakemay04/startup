@@ -117,14 +117,16 @@ export function Home() {
         </div>
 
         <div className="feed-container">
-          <div className="feed-item-profile">
-            <PostInput onPostSubmit={handlePostSubmit} />
-            {/* Profile info can go here */}
-            {posts.map(post => (
-              <PostCard key={post.id} post={post} />
-            ))}
-            {posts.length === 0 && <p>No posts available.</p>}
-          </div>
+          <PostInput onPostSubmit={handlePostSubmit} />
+
+            <div className="scrollable-feed-content">
+
+              {/* Profile info can go here */}
+              {posts.map(post => (
+                <PostCard key={post.id} post={post} />
+              ))}
+              {posts.length === 0 && <p>No posts available.</p>}
+            </div>
         </div>
       </div>
     </main>
