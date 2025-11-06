@@ -94,12 +94,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - uses node.js to manage the posts and login functions.
+- [x] **Static middleware for frontend** - yes
+- [x] **Calls to third party endpoints** - an inspo quote tab is on the side of the home screen.
+- [x] **Backend service endpoints** - index.js handles all api calls for login and managing posts
+- [x] **Frontend calls service endpoints** - Displaying user email and posts on the home page.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Login and logout functions using api calls. allows for logging out and posting.
 
 
 ## 🚀 DB deliverable
@@ -118,4 +118,5 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
 - [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+
 
