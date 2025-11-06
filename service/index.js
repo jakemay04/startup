@@ -8,6 +8,8 @@ app.use(express.json());
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+const path = require('path');
+
 
 const cookieParser = require('cookie-parser');
 const uuid = require('uuid');
@@ -100,3 +102,16 @@ function getUser(field, value) {
   }
   return null;
 }
+
+const verifyAuth = async (req, res, next) => {
+  const user = await findUser('token', req.cookies[authCookieName]);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+};
+
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});

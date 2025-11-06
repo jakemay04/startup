@@ -1,7 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { AuthState } from '../login/authstate';
 
 export const UserContext = createContext({
   user: null,
+  authState: AuthState.Unauthenticated,
   setUser: () => {},
   clearUser: () => {},
 });
@@ -24,10 +26,19 @@ export function UserProvider({ children }) {
     }
   }, [user]);
 
-  const clearUser = () => setUser(null);
+  const clearUser = async () => {
+    try {
+      await fetch('api/auth', { method: 'DELETE' }); 
+    } catch (e) {
+      console.error('Error during logout API call', e);
+    }
+    setUser(null);
+  };
+
+  const authState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
 
   return (
-    <UserContext.Provider value={{ user, setUser, clearUser }}>
+    <UserContext.Provider value={{ user, setUser, clearUser, authState}}>
       {children}
     </UserContext.Provider>
   );

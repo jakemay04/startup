@@ -2,10 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import './profile.css';
 import { UserContext } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
+import { AuthState } from '../login/authstate';
 
 
 export function Profile() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, authState } = useContext(UserContext);
   
   const initialProfile = {
     name: user?.username || 'User',
@@ -94,14 +95,30 @@ export function Profile() {
       fetch('api/auth', {
         method: 'DELETE',
       });
-      setUser({});
+      setUser(null);      
+      console.log({authState});
       navigate('/login');
-    }
+      }
 
+  if (authState === AuthState.Unknown) {
+    return <main className="container-fluid bg-secondary text-center">
+      <h2>Loading...</h2>
+    </main>;
+  }
 
-  return (
+  if (authState === AuthState.Unauthenticated) {
+    return <main className="container-fluid bg-secondary text-center">
+      <h2>You are not logged in</h2>
+      <button className="site-button" onClick={() => navigate('/login')}>Go to Login</button>
+    </main>;
+  }
+
+  
+  if (authState === AuthState.Authenticated) {
+    return (
     <main className="container-fluid bg-secondary text-center">
       <div className="profile-card">
+
         <header style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
           <div className="profile-avatar">{profile.name[0]}</div>
           <div style={{ textAlign: 'left' }}>
@@ -166,3 +183,5 @@ export function Profile() {
     </main>
   );
 }
+}
+  
