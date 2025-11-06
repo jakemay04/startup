@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/userContext';
 import './home.css';
 
@@ -22,6 +22,7 @@ const SideBarTextBox = ({ title, content }) => {
     </div>
   );
 };
+
 
 const getInitialPosts = () => {
   const initialPosts = [
@@ -79,7 +80,8 @@ const PostInput = ({ onPostSubmit }) => {
 };
 
 export function Home() {
-  const [postContent, setPostContent] = React.useState('');
+  const [quote, setQuote] = React.useState('Loading...');
+  const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
   const { user } = useContext(UserContext);
   const [posts, setPosts] = React.useState(getInitialPosts);
 
@@ -94,13 +96,24 @@ export function Home() {
   const handlePostSubmit = (newPost) => {
     setPosts(prevPosts => [newPost, ...prevPosts]);
   }
+
+  useEffect(() => {
+    fetch('https://quote.cs260.click')
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.quote);
+        setQuoteAuthor(data.author);
+      })
+      .catch();
+  }, []);
+
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>Logged in as: {user?.username || user?.email}</div>
       <div className="feed-layout">
 
         <div className="feed-sidebar-left">
-        <SideBarTextBox title= "Daily Inspo" content="Sample text for Daily Inspo." />
+        <SideBarTextBox title= "Daily Inspo" content= {quote} />
         </div>
 
         <div className="feed-container">
