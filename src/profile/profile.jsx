@@ -3,8 +3,7 @@ import './profile.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../login/authstate';
 
-
-export function Profile() {
+export function Profile({ onAuthChange }) {
   // const { user, setUser, authState } = useContext(UserContext);
 
   const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
@@ -26,16 +25,19 @@ export function Profile() {
       try {
         const response = await fetch('/api/profile', {
           method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
         });
         if (response.ok) {
           const data = await response.json();
           console.log('Fetched profile data:', data);
           setProfile(data);
+          setAuthState(AuthState.Authenticated);
+        } else {
+          setAuthState(AuthState.Unauthenticated);
         }
       } catch (error) {
         console.error('Error fetching profile data:', error);
+        setAuthState(AuthState.Unauthenticated);
       }
     }
     fetchProfile();
@@ -86,12 +88,15 @@ export function Profile() {
 
     const navigate = useNavigate();
 
-    function handleLogout() {
-      fetch('api/auth', {
+    async function handleLogout() {
+      await fetch('api/auth', {
         method: 'DELETE',
         credentials: 'include',
       });
+      setAuthState(AuthState.Unauthenticated);
+      onAuthChange('', AuthState.Unauthenticated);
       console.log({authState});
+      localStorage.removeItem('email');
       navigate('/login');
       }
 
@@ -103,7 +108,7 @@ export function Profile() {
 
   if (authState === AuthState.Unauthenticated) {
     return <main className="container-fluid bg-secondary text-center">
-      <h2>{profile}</h2>
+      <h2>"you are not logged in"</h2>
       <button className="site-button" onClick={() => navigate('/login')}>Go to Login</button>
     </main>;
   }

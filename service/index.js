@@ -107,6 +107,10 @@ async function getUser(field, value) {
 }
 
 const verifyAuth = async (req, res, next) => {
+  if (!token) {
+    res.status(401).send({ msg: 'Unauthorized' });
+    return;
+  }
   const user = await getUser('token', req.cookies['token']);
   if (user) {
     next();

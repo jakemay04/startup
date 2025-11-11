@@ -14,6 +14,17 @@ export default function App() {
   const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
   const currentAuthState = email ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
+  function onAuthChange(newEmail, newAuthState) {
+    setAuthState(newAuthState);
+    setEmail(newEmail);
+    
+    // Ensure localStorage is updated so the state persists on refresh
+    if (newEmail) {
+      localStorage.setItem('email', newEmail);
+    } else {
+      localStorage.removeItem('email');
+    }
+  }
 
   return (
     <BrowserRouter>
@@ -27,13 +38,19 @@ export default function App() {
             <nav>
                 <menu>
                 <div className="tabs"></div>
-                {authState === AuthState.Authenticated && (<NavLink className="tab" to="home">
-                    Home
-                </NavLink>
-                )}
-                {authState === AuthState.Authenticated && (<NavLink className="tab" to="profile">
-                    Profile
-                </NavLink>
+                <div className="tabs"></div>
+                {/* 🚨 DEBUGGING LINE: CHECK THIS VALUE IN YOUR BROWSER CONSOLE 🚨 */}
+                {console.log("DEBUG: Current AuthState is:", authState)}
+                {/* The condition relies on the value logged above */}
+                {authState === AuthState.Authenticated && (
+                  <>
+                    <NavLink className="tab" to="home">
+                      Home
+                    </NavLink>
+                    <NavLink className="tab" to="profile">
+                      Profile
+                    </NavLink>
+                  </>
                 )}
                 <NavLink className="tab" to="about">
                     About
@@ -43,9 +60,30 @@ export default function App() {
             <hr />
         </header>
             <Routes>
-                <Route path='/login' element={<Login />} />
+                <Route 
+                    path='/' 
+                    element={<Login 
+                        email={email} 
+                        authState={authState}
+                        onAuthChange={onAuthChange}
+                    />} 
+                    exact
+                />
+                <Route 
+                    path='/login' 
+                    element={<Login 
+                        email={email} 
+                        authState={authState}
+                        onAuthChange={onAuthChange}
+                    />} 
+                />
                 <Route path='/home' element={<Home />} />
-                <Route path='/profile' element={<Profile />} />
+                <Route 
+                    path='/profile' 
+                    element={<Profile 
+                        onAuthChange={onAuthChange}
+                    />} 
+                />
                 <Route path='/about' element={<About />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>

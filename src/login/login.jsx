@@ -5,7 +5,7 @@ import './login.css';
 
 
 
-export function Login() {
+export function Login({ onAuthChange }) {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -30,6 +30,7 @@ export function Login() {
       if (response?.status === 200) {
         localStorage.setItem('email', email);
         setAuthState(AuthState.Authenticated);
+        if (onAuthChange) onAuthChange(email, AuthState.Authenticated);
         navigate('/home');
       }
     }
@@ -41,7 +42,7 @@ export function Login() {
 
   useEffect(() => {
     if (authState === AuthState.Authenticated) {
-      // navigate('/home');
+      navigate('/home');
     }
   }, [authState, navigate]);
 
