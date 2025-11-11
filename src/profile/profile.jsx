@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../login/authstate';
 
 export function Profile({ onAuthChange }) {
-  // const { user, setUser, authState } = useContext(UserContext);
 
   const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
   const currentAuthState = email ? AuthState.Authenticated : AuthState.Unauthenticated;
@@ -20,7 +19,6 @@ export function Profile({ onAuthChange }) {
   const [profile, setProfile] = useState(initialProfile);
 
   useEffect(() => {
-    // Fetch profile data from the server when component mounts
     async function fetchProfile() {
       try {
         const response = await fetch('/api/profile', {
@@ -80,7 +78,6 @@ export function Profile({ onAuthChange }) {
 
   };
 
-    // Handle input changes for both inputs and textarea
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData(prev => ({ ...prev, [name]: value }));

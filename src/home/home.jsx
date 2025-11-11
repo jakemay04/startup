@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../context/userContext';
 import './home.css';
+
 
 const PostCard = ({ post }) => {
   return (
@@ -24,44 +24,27 @@ const SideBarTextBox = ({ title, content }) => {
 };
 
 
-const getInitialPosts = () => {
-  const initialPosts = [
-    { id: 1, content: "This is the first post in the feed!", email: "default@user.com", username: "DefaultUser" },
-    { id: 2, content: "Here's another post with some text.", email: "default@user.com", username: "DefaultUser" },
-    { id: 3, content: "Enjoy this third post in the feed!", email: "default@user.com", username: "DefaultUser" },
-  ];
-  
-  try {
-    const storedPosts = localStorage.getItem('app_posts');
-    if (storedPosts) {
-      // Parse the stored JSON data
-      const parsedPosts = JSON.parse(storedPosts);
-      // Return stored posts if valid, otherwise return the default list
-      return parsedPosts.length > 0 ? parsedPosts : initialPosts;
-    }
-  } catch (error) {
-    console.error("Error reading from localStorage:", error);
-    // Fallback to initial posts if reading or parsing fails
-  }
-  return initialPosts;
-};
-
-
 const PostInput = ({ onPostSubmit }) => {
   const [postContent, setPostContent] = React.useState('');
-  const { user } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (postContent.trim()) {
-      // Pass 'username' and 'email' to the new post object
-      onPostSubmit({ 
-        id: Date.now(), 
-        content: postContent, 
-        username: user?.username || user?.email || 'Unknown User',
-        email: user?.email || 'U' // for avatar display
-      });
-      setPostContent('');
+      try {
+        const response = await fetch('/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ content: postContent }),
+        });
+        if (response.ok) {
+          const newPost = await response.json();
+          onPostSubmit(newPost);
+          setPostContent('');
+        }
+      } catch (error) {
+        console.error('Error posting:', error);
+      }
     }
   };
 
@@ -82,20 +65,55 @@ const PostInput = ({ onPostSubmit }) => {
 export function Home() {
   const [quote, setQuote] = React.useState('Loading...');
   const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
-  const { user } = useContext(UserContext);
-  const [posts, setPosts] = React.useState(getInitialPosts);
+  const [posts, setPosts] = React.useState([]);
+  const [username, setUsername] = React.useState('User');
+  const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
+  async function fetchUsername() {
     try {
-      localStorage.setItem('app_posts', JSON.stringify(posts));
+      const response = await fetch('/api/profile', {
+        method: 'GET',
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUsername(data.name);
+      }
     } catch (error) {
-      console.error("Error writing to localStorage:", error);
+      console.error('Error fetching username:', error);
     }
-  }, [posts]);
-
-  const handlePostSubmit = (newPost) => {
-    setPosts(prevPosts => [newPost, ...prevPosts]);
   }
+  fetchUsername();
+  }, []);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await fetch('/api/posts', {
+          method: 'GET',
+          credentials: 'include',
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data.length === 0) {
+          const initialPosts = [
+            { id: 1, content: 'Welcome to the feed!', username: 'Admin', email: 'admin@example.com' },
+            { id: 2, content: 'Feel free to share your thoughts!', username: 'Admin', email: 'admin@example.com' },
+          ];
+          setPosts(initialPosts);
+        } else {
+          setPosts(data);
+        }
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
 
   useEffect(() => {
     fetch('https://quote.cs260.click')
@@ -107,9 +125,17 @@ export function Home() {
       .catch();
   }, []);
 
+    const handlePostSubmit = (newPost) => {
+    setPosts(prevPosts => [newPost, ...prevPosts]);
+  };
+
+  if (loading) {
+    return <main className="container-fluid bg-secondary text-center"><h2>Loading...</h2></main>;
+  }
+
   return (
     <main className="container-fluid bg-secondary text-center">
-      <div>Logged in as: {user?.username || user?.email}</div>
+      <div>Logged in as: {username || email}</div>
       <div className="feed-layout">
 
         <div className="feed-sidebar-left">

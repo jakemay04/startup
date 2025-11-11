@@ -57,7 +57,6 @@ export function Login({ onAuthChange }) {
     return (
     <main className="container-fluid bg-secondary text-center">
       {authState !== AuthState.Unknown && <h1>Welcome to Personal Favorite</h1>}
-      {/* <form onSubmit={handleSubmit}> */}
         <div className="logincontainer">
             <h2>Start Here</h2>
           <span>:)    </span>
@@ -81,7 +80,6 @@ export function Login({ onAuthChange }) {
         </div>
   <button type="button" className="site-button" disabled={!(email && password)} onClick={handleLogin}>Login</button>
   <button type="button" className="site-button" disabled={!(email && password)} onClick={handleRegister}>Create</button>
-      {/* </form> */}
     </main>
   );
 }

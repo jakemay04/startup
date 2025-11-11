@@ -17,10 +17,6 @@ app.use(`/api`, apiRouter);
 const path = require('path');
 const users = [];
 
-
-
-
-
 function setAuthCookie(res, user) {
   user.token = uuid.v4();
 
@@ -84,8 +80,9 @@ app.get('/api/user/me', async (req, res) => {
 });
 
 app.listen(4000);
- //store users in memory.
+console.log(`Server listening on port ${port}`);
 
+ //store users in memory.
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -107,6 +104,7 @@ async function getUser(field, value) {
 }
 
 const verifyAuth = async (req, res, next) => {
+  const token = req.cookies['token'];
   if (!token) {
     res.status(401).send({ msg: 'Unauthorized' });
     return;
@@ -161,6 +159,36 @@ apiRouter.put("/profile", verifyAuth, async (req, res) => {
   } catch (error) {
     console.error('Error updating profile:', error);
     res.status(500).send({ msg: 'Internal server error' });
+  }
+});
+
+//store posts in memory
+const posts = [];
+apiRouter.post('/posts', verifyAuth, async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    const post = {
+      id: uuid.v4(),
+      content: req.body.content,
+      email: user.email,
+      username: user.name || "User",
+      timestamp: new Date(),
+    };
+    posts.unshift(post); // add to the beginning
+    res.send(post);
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+apiRouter.get('/posts', verifyAuth, async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    res.send(posts);
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
   }
 });
 
