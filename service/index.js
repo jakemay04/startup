@@ -5,17 +5,21 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.static('public'));
 app.use(express.json());
 
-const apiRouter = express.Router();
-app.use(`/api`, apiRouter);
-
-const path = require('path');
-
-
 const cookieParser = require('cookie-parser');
 const uuid = require('uuid');
 const bcrypt = require('bcryptjs');
 
 app.use(cookieParser());
+
+const apiRouter = express.Router();
+app.use(`/api`, apiRouter);
+
+const path = require('path');
+const users = [];
+
+
+
+
 
 function setAuthCookie(res, user) {
   user.token = uuid.v4();
@@ -28,7 +32,7 @@ function setAuthCookie(res, user) {
 }
 
 // Registration endpoint
-app.post('/api/auth', async (req, res) => {
+app.put('/api/auth', async (req, res) => {
   if (await getUser('email', req.body.email)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
@@ -41,7 +45,7 @@ app.post('/api/auth', async (req, res) => {
 });
 
 // login
-app.put('/api/auth', async (req, res) => {
+app.post('/api/auth', async (req, res) => {
   const user = await getUser('email', req.body.email);
   if (user && (await bcrypt.compare(req.body.password, user.password))) {
     setAuthCookie(res, user);
@@ -80,8 +84,7 @@ app.get('/api/user/me', async (req, res) => {
 });
 
 app.listen(4000);
-
-const users = [];
+ //store users in memory.
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
@@ -96,7 +99,7 @@ async function createUser(email, password) {
   return user;
 }
 
-function getUser(field, value) {
+async function getUser(field, value) {
   if (value) {
     return users.find((user) => user[field] === value);
   }
@@ -104,13 +107,58 @@ function getUser(field, value) {
 }
 
 const verifyAuth = async (req, res, next) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
+  const user = await getUser('token', req.cookies['token']);
   if (user) {
     next();
   } else {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 };
+
+// Profile endpoint
+apiRouter.get("/profile", verifyAuth, async (req, res) => {
+  const token = req.cookies['token'];
+  const user = await getUser('token', token);
+  if (user) {
+    res.send({ 
+      name: user.name || "User", 
+      email: user.email, 
+      bio: user.bio || "", 
+      location: user.location || "" 
+    });
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+// Update profile endpoint
+apiRouter.put("/profile", verifyAuth, async (req, res) => {
+  try {
+    const token = req.cookies['token'];
+    const user = await getUser('token', token);
+    
+    if (user) {
+      // Update user profile fields
+      user.name = req.body.name || user.name;
+      user.bio = req.body.bio || user.bio;
+      user.location = req.body.location || user.location;
+      
+      const userProfile = {
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        location: user.location,
+      };
+
+      res.send(userProfile); // Send the safe object
+    } else {
+      res.status(401).send({ msg: 'Unauthorized' });
+    }
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    res.status(500).send({ msg: 'Internal server error' });
+  }
+});
 
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

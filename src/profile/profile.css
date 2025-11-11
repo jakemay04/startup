@@ -27,6 +27,25 @@ main.container-fluid {
   padding-bottom: 24px;
 }
 
+.buttonContainerStyle {
+    display: 'flex';
+    gap: '10px';
+    justify-self: 'center';
+    margin: '12px';
+}
+
+.buttonStyle {
+    padding: '10px 16px';
+    border: '1px solid #ccc';
+    background: '#fff';
+    cursor: 'pointer';
+  }
+.primaryButtonStyle {
+    background: '#007bff';
+    color: '#fff';
+    border: 'none';
+}
+
 @media (max-width: 600px) {
   .profile-card {
     width: 95%;

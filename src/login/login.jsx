@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../context/userContext';
 import { AuthState } from './authstate';
 import './login.css';
 
@@ -11,48 +9,39 @@ export function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const { authState, setUser } = useContext(UserContext);
+  const [authState,setAuthState] = React.useState(AuthState.Unauthenticated);
 
   function handleLogin() {
-    createAuth('PUT');
+    createAuth(`POST`);
   }
 
   function handleRegister() {
-    createAuth('POST');
+    createAuth(`PUT`);
   }
 
  async function createAuth(method) {
     try {
-      const res = await fetch('api/auth', {
+      const response = await fetch('api/auth', {
         method: method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
 
-      let data = {};
-      try {
-        data = await res.json();
-      } catch (e) {
-        console.warn('Could not parse API response as JSON (likely empty body or text response).');
-      }
-
-      if (res.ok) {
-        setUser(data);
+      if (response?.status === 200) {
+        localStorage.setItem('email', email);
+        setAuthState(AuthState.Authenticated);
         navigate('/home');
-      } else {
-        const errorMsg = data.msg || `Authentication failed with status ${res.status}.`;
-        alert(errorMsg);
       }
-
-    } catch (error) {
-      console.error("Network Error:", error);
-      alert("Could not connect to the server. Please check your network connection.");
+    }
+ catch (error) {
+      console.error('Error during authentication:', error);
     }
   }
 
+
   useEffect(() => {
     if (authState === AuthState.Authenticated) {
-      navigate('/home');
+      // navigate('/home');
     }
   }, [authState, navigate]);
 

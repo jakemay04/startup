@@ -6,13 +6,17 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Profile } from './profile/profile';
 import { About } from './about/about';
-import { UserProvider } from './context/userContext'; 
+// import { UserProvider } from './context/userContext'; 
+import { AuthState } from './login/authstate';
 
 
 export default function App() {
+  const [email, setEmail] = React.useState(localStorage.getItem('email') || '');
+  const currentAuthState = email ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
-            <UserProvider>
                 <div className="body bg-light text-light">
                 <header>
                         <link rel="icon" href="/favicon.ico" />
@@ -23,12 +27,14 @@ export default function App() {
             <nav>
                 <menu>
                 <div className="tabs"></div>
-                <NavLink className="tab" to="home">
+                {authState === AuthState.Authenticated && (<NavLink className="tab" to="home">
                     Home
                 </NavLink>
-                <NavLink className="tab" to="profile">
+                )}
+                {authState === AuthState.Authenticated && (<NavLink className="tab" to="profile">
                     Profile
                 </NavLink>
+                )}
                 <NavLink className="tab" to="about">
                     About
                 </NavLink>
@@ -37,7 +43,6 @@ export default function App() {
             <hr />
         </header>
             <Routes>
-                <Route path='/' element={<Login />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/home' element={<Home />} />
                 <Route path='/profile' element={<Profile />} />
@@ -54,7 +59,6 @@ export default function App() {
             </footer>
 
         </div>
-        </UserProvider>
     </BrowserRouter>
   );
 }
