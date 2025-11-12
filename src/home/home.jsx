@@ -149,7 +149,10 @@ export function Home( { email } ) {
 
               {/* Profile info can go here */}
               {posts.map(post => (
-                <PostCard key={post.id} post={post} />
+                <PostCard 
+                  key={post._id || post.id} // <-- FIX IS HERE
+                  post={post} 
+                />
               ))}
               {posts.length === 0 && <p>No posts available.</p>}
             </div>
