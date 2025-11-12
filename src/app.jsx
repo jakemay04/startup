@@ -6,7 +6,6 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Profile } from './profile/profile';
 import { About } from './about/about';
-// import { UserProvider } from './context/userContext'; 
 import { AuthState } from './login/authstate';
 
 
@@ -39,9 +38,7 @@ export default function App() {
                 <menu>
                 <div className="tabs"></div>
                 <div className="tabs"></div>
-                {/* 🚨 DEBUGGING LINE: CHECK THIS VALUE IN YOUR BROWSER CONSOLE 🚨 */}
                 {console.log("DEBUG: Current AuthState is:", authState)}
-                {/* The condition relies on the value logged above */}
                 {authState === AuthState.Authenticated && (
                   <>
                     <NavLink className="tab" to="home">
@@ -67,7 +64,6 @@ export default function App() {
                         authState={authState}
                         onAuthChange={onAuthChange}
                     />} 
-                    exact
                 />
                 <Route 
                     path='/login' 

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../login/authstate';
@@ -117,8 +117,7 @@ export function Profile({ onAuthChange }) {
       <div className="profile-card">
 
         <header style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-          <div className="profile-avatar">{profile.name[0]}</div>
-          <div style={{ textAlign: 'left' }}>
+          <div className="profile-avatar">{(profile.name || 'U')[0]}</div>          <div style={{ textAlign: 'left' }}>
             <h2 style={{ margin: 0 }}>{profile.name}</h2>
             <p style={{ margin: 0, fontSize: 14, color: '#666' }}>{profile.email}</p>
           </div>
@@ -146,7 +145,7 @@ export function Profile({ onAuthChange }) {
                 type="text"
                 id="name"
                 name="name"
-                value={formData.name}
+                value={formData.name || ''}
                 onChange={handleChange}
                 className="logininput"
               />
@@ -155,7 +154,7 @@ export function Profile({ onAuthChange }) {
                 type="text"
                 id="location"
                 name="location"
-                value={formData.location}
+                value={formData.location || ''}
                 onChange={handleChange}
                 className="logininput"
               />
@@ -164,7 +163,7 @@ export function Profile({ onAuthChange }) {
                 id="bio"
                 name="bio"
                 rows="4"
-                value={formData.bio}
+                value={formData.bio || ''}
                 onChange={handleChange}
                 style={{ padding: 10, borderRadius: 6, border: '1px solid #ccc' }}
               ></textarea>

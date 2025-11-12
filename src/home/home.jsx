@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './home.css';
 
 
@@ -62,7 +62,7 @@ const PostInput = ({ onPostSubmit }) => {
   );
 };
 
-export function Home() {
+export function Home( { email } ) {
   const [quote, setQuote] = React.useState('Loading...');
   const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
   const [posts, setPosts] = React.useState([]);
