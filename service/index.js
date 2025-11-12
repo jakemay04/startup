@@ -20,9 +20,9 @@ function setAuthCookie(res, user) {
   user.token = uuid.v4();
 
   res.cookie('token', user.token, {
-    secure: false,
+    secure: true,
     httpOnly: true,
-    sameSite: 'lax',
+    sameSite: 'strict',
   });
 }
 
