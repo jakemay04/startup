@@ -5,6 +5,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Home } from './home/home';
 import { Profile } from './profile/profile';
+import { Chatroom } from './chatroom/chatroom';
 import { About } from './about/about';
 import { AuthState } from './login/authstate';
 
@@ -80,6 +81,7 @@ export default function App() {
                         onAuthChange={onAuthChange}
                     />} 
                 />
+                <Route path='/chatroom' element={<Chatroom />} />
                 <Route path='/about' element={<About />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>

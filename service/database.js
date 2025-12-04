@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
 
 //test server connection
-const url = `###`;
+const url = `mongodb+srv://jakemay:jake2004@databasecs260.gxbpkj8.mongodb.net`;
 const client = new MongoClient(url);
 const db = client.db('startup');
 

@@ -5,7 +5,10 @@ const cookieParser = require('cookie-parser');
 const uuid = require('uuid');
 const bcrypt = require('bcryptjs');
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const http = require('http'); // Import built-in http module
+const { initializeWebSocketService } = require('./websocketService'); // Import the service
+
+const port = process.argv.length > 2 ? process.argv[2] : 5000;
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
@@ -83,8 +86,9 @@ app.get('/api/user/me', async (req, res) => {
   }
 });
 
-app.listen(4000);
-console.log(`Server listening on port ${port}`);
+// REMOVED: app.listen(4000); 
+// We must use the 'server.listen' command below, not 'app.listen' here.
+// console.log(`Server listening on port ${port}`); // Also removed this duplicate log
 
 //create new user
 async function createUser(email, password) {
@@ -214,6 +218,14 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
     console.error('Error creating post:', error);
     res.status(500).send({ msg: 'Internal server error' });
   }
+});
+
+// STARTING THE INTEGRATED SERVER (HTTP + WS)
+const server = http.createServer(app);
+initializeWebSocketService(server); // Initialize WebSocket on the proper server instance
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+  console.log(`WebSocket path: ws://localhost:${port}/ws`);
 });
 
 app.use((req, res) => {

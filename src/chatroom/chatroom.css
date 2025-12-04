@@ -1,0 +1,127 @@
+/* --- 1. Base Reset and Container Styling --- */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: white; /* Plain white background */
+    color: black; /* Default text color */
+}
+
+.app-container {
+    display: flex;
+    justify-content: center;
+}
+
+.chat-card {
+    width: 100%;
+    max-width: 400px; /* Simplified max width */
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.chat-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.chat-content > * + * {
+    margin-top: 10px;
+}
+
+/* --- 2. Status Bar --- */
+.chat-status {
+    font-size: 0.9em;
+    text-align: center;
+    padding-top: 5px;
+    border-top: 1px solid black;
+    margin-top: 10px;
+}
+
+.status-connected {
+    color: green;
+}
+
+.status-disconnected {
+    color: red;
+}
+
+/* --- 3. Input Controls --- */
+.input-wrapper {
+    padding: 5px;
+    border: 1px dashed gray; /* Basic visual separation */
+}
+
+.input-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.input-legend {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.text-input {
+    flex: 1;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.send-button {
+    padding: 3px 8px;
+    background-color: #ccc; /* Basic gray button */
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.send-button:disabled, .text-input:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+/* --- 4. Conversation History --- */
+.conversation-box {
+    height: 200px; /* Fixed height for scrolling */
+    overflow-y: auto;
+    border: 1px solid black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.chat-message {
+    margin: 2px 0;
+    padding: 1px 0;
+    color: black;
+}
+
+.message-name {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Specific Message Types (Minimal distinction) */
+.system-message {
+    text-align: center;
+    font-style: italic;
+    color: gray;
+}
+
+.sent-message {
+    text-align: right;
+    /* No color change, just alignment */
+}
+
+.received-message {
+    text-align: left;
+    /* No color change, just alignment */
+}
+
+.message-name.hidden {
+    display: none;
+}
