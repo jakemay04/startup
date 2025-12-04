@@ -48,6 +48,9 @@ export default function App() {
                     <NavLink className="tab" to="profile">
                       Profile
                     </NavLink>
+                    <NavLink className="tab" to="chatroom">
+                      Chatroom
+                    </NavLink>
                   </>
                 )}
                 <NavLink className="tab" to="about">

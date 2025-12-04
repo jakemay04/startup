@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const http = require('http'); // Import built-in http module
 const { initializeWebSocketService } = require('./websocketService'); // Import the service
 
-const port = process.argv.length > 2 ? process.argv[2] : 5000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());

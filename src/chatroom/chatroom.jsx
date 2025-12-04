@@ -13,12 +13,8 @@ export function Chatroom() {
     constructor(setConnected) { 
       const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
       
-      // CRITICAL FIX: Explicitly target the backend port (5000)
-      const currentHost = window.location.hostname;
-      const backendPort = 5000;
-      
-      this.socket = new WebSocket(`${protocol}://${currentHost}:${backendPort}/ws`);
-      console.log(`Attempting WS connection to: ${protocol}://${currentHost}:${backendPort}/ws`);
+      const host = window.location.host;
+      this.socket = new WebSocket(`${protocol}://${host}/ws`);
 
       this.socket.onopen = (event) => {
         this.notifyObservers('system', 'websocket', 'connected');
